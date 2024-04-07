@@ -18,7 +18,10 @@ const Navbar: React.FC<Props> = () => {
                     Zoom
                 </p>
             </Link>
-            <div className="flex-between gap-5">{/* {clerk} */}</div>
+            <div className="flex-between gap-5">
+                {/* {clerk} - manage */}
+                MobileNav
+            </div>
         </nav>
     );
 };
