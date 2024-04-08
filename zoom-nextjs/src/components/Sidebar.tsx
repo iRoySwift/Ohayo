@@ -9,7 +9,6 @@ import React from "react";
 interface Props {}
 const Sidebar: React.FC<Props> = () => {
     const pathname = usePathname();
-    console.log("🚀 ~ pathname:", pathname);
     return (
         <div className="flex h-screen w-fit flex-col justify-between bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
             <div className="flex flex-1 flex-col gap-6">
