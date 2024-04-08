@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import MobileNav from "./MobileNav";
 
 interface Props {}
 const Navbar: React.FC<Props> = () => {
@@ -20,7 +21,7 @@ const Navbar: React.FC<Props> = () => {
             </Link>
             <div className="flex-between gap-5">
                 {/* {clerk} - manage */}
-                MobileNav
+                <MobileNav />
             </div>
         </nav>
     );
