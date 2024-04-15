@@ -36,7 +36,7 @@ export default function RootLayout({
                     colorInputText: "#fff",
                 },
             }}>
-            <html lang="en">
+            <html lang="en" className="dark">
                 <body className={`${inter.className} bg-dark-2`}>
                     {children}
                     <Toaster />
