@@ -58,7 +58,7 @@ const MeetingModal: React.FC<Props> = props => {
                     </h1>
                     {children}
                     <Button
-                        className="bg-blue-1 hover:bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="bg-primary hover:bg-primary focus-visible:ring-0 focus-visible:ring-offset-0"
                         onClick={handleClick}>
                         {buttonIcon && (
                             <Image

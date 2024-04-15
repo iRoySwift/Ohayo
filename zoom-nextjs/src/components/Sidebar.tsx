@@ -21,7 +21,7 @@ const Sidebar: React.FC<Props> = () => {
                             className={cn(
                                 "flex items-center justify-start gap-4 rounded-lg p-4",
                                 {
-                                    "bg-blue-1": isActive,
+                                    "bg-primary": isActive,
                                 }
                             )}>
                             <Image

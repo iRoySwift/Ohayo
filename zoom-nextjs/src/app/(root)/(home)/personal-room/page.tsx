@@ -65,7 +65,7 @@ const PersonalRoom: React.FC<Props> = () => {
                 <Table title="Invite Link" description={`${meetingLink}`} />
             </div>
             <div className="flex gap-5">
-                <Button className="bg-blue-1" onClick={startRoom}>
+                <Button className="bg-primary" onClick={startRoom}>
                     Start Meeting
                 </Button>
                 <Button

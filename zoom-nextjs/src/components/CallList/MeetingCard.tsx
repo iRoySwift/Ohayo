@@ -55,7 +55,7 @@ const MeetingCard: React.FC<Props> = props => {
                             style={{ top: 0, left: index * 28 }}
                         />
                     ))}
-                    <div className="flex-center border-dark-3 bg-dark-4 absolute left-[136px] size-10 rounded-full border-[5px]">
+                    <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-dark-3 bg-dark-4">
                         +5
                     </div>
                 </div>
@@ -63,7 +63,7 @@ const MeetingCard: React.FC<Props> = props => {
                     <div className="flex gap-2">
                         <Button
                             onClick={handleClick}
-                            className="rounded bg-blue-1 px-6">
+                            className="rounded bg-primary px-6">
                             {buttonIcon1 && (
                                 <Image
                                     src={buttonIcon1}

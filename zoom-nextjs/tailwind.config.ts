@@ -29,9 +29,6 @@ const config = {
                     1: "#C9DDFF",
                     2: "#ECF0FF",
                 },
-                blue: {
-                    1: "#0E78F9",
-                },
                 orange: {
                     1: "#FF742E",
                 },

@@ -56,7 +56,7 @@ const MobileNav: React.FC<Props> = () => {
                                                 className={cn(
                                                     "flex w-full max-w-60 items-center justify-start gap-4 rounded-lg p-4",
                                                     {
-                                                        "bg-blue-1": isActive,
+                                                        "bg-primary": isActive,
                                                     }
                                                 )}>
                                                 <Image

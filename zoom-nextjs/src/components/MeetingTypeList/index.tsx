@@ -78,7 +78,7 @@ const MeetingTypeList: React.FC<Props> = () => {
                 img="/icons/join-meeting.svg"
                 title="Join Meeting"
                 description="via invitation link"
-                className="bg-blue-1"
+                className="bg-primary"
                 handleClick={() => setMeetingState("isJoiningMeeting")}
             />
             <HomeCard
