@@ -26,6 +26,16 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Create a new project
+
+```bash
+$ nest new ordering-nest
+$ nest g app orders
+$ nest g app billing
+$ nest g app auth
+$ nest g lib common
+```
+
 ## Installation
 
 ```bash

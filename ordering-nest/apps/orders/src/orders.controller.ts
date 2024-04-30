@@ -7,23 +7,18 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Get()
-  getHello(): string {
-    return this.ordersService.getHello();
-  }
-
-  @Get('ids')
   async getOrders() {
     return this.ordersService.getOrders();
   }
 
   @Get('order/:id')
-  async getOrdersById(@Param('id') id: string) {
-    return this.ordersService.getOrdersById(id);
+  async getOrderById(@Param('id') id: string) {
+    return this.ordersService.getOrderById(id);
   }
 
   @Get('orderId')
-  async getOrdersId(@Query() query) {
-    return this.ordersService.getOrdersById(query.id);
+  async getOrderId(@Query() query: { id: string }) {
+    return this.ordersService.getOrderById(query.id);
   }
 
   @Post()
