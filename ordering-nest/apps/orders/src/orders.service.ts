@@ -20,13 +20,14 @@ export class OrdersService {
     return this.orderRepository.findOne({ _id: id });
   }
 
-  async createOrder(request: CreateOrderRequest) {
+  async createOrder(request: CreateOrderRequest, authentication: string) {
     const session = await this.orderRepository.startTransaction();
     try {
       const order = await this.orderRepository.create(request, { session });
       await lastValueFrom(
         this.billingClient.emit('order_created', {
           request,
+          Authentication: authentication,
         }),
       );
       await session.commitTransaction();
