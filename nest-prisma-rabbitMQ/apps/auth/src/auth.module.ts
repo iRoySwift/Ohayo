@@ -8,6 +8,9 @@ import { UsersModule } from './users/users.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
+
+@Module({
+  imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -16,6 +19,15 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         JWT_EXPIRATION: Joi.number().required(),
       }),
       envFilePath: ['./apps/auth/.env'],
+    }),
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: {
+          expiresIn: `${configService.get<number>('JWT_EXPIRATION')}s`,
+        },
+      }),
+      inject: [ConfigService],
     }),
     DatabaseModule,
     UsersModule,

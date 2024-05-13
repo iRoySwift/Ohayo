@@ -64,7 +64,7 @@ $ pnpm run test:cov
 $ docker-compose up --build -V
 ```
 
-## prisma
+## Prisma
 
 ```bash
 $ pnpm prisma migrate dev --name init
