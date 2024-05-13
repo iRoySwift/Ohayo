@@ -10,7 +10,7 @@ interface Props {}
 const Sidebar: React.FC<Props> = () => {
     const pathname = usePathname();
     return (
-        <div className="flex h-screen w-fit flex-col justify-between bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
+        <div className="flex h-[calc(100vh-80px)] w-fit flex-col justify-between overflow-auto bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
             <div className="flex flex-1 flex-col gap-6">
                 {sidebarLinks.map(link => {
                     const isActive = pathname === link.route;
