@@ -26,6 +26,14 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## generate
+
+```bash
+$ nest g app auth
+$ nest g resource users
+$  nest g lib rmq
+```
+
 ## Installation
 
 ```bash

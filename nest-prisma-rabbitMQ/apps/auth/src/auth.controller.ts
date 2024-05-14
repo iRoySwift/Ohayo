@@ -5,6 +5,7 @@ import { JwtAuthGuard } from './guard/jwt-auth.guard';
 import { CurrentUser } from './current-user.decorator';
 import { Response } from 'express';
 import { User } from './users/entities/user.entity';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('auth')
 export class AuthController {
@@ -29,5 +30,10 @@ export class AuthController {
   @Get('profile')
   getUser(@CurrentUser() user: User): User {
     return user;
+  }
+
+  @MessagePattern('test')
+  async test(@Payload() data: string) {
+    console.log('🚀 ~ AuthController ~ test ~ data:', data);
   }
 }

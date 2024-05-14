@@ -1,7 +1,45 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: ./apps/app/Dockerfile
+      target: development
+    command: npm run start:dev app
+    env_file:
+      - ./apps/app/.env
+    depends_on:
+      - auth
+    volumes:
+      - .:/usr/src/nest-prisma-rabbitMQ
+      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - /usr/src/nest-prisma-rabbitmq/prisma
+    ports:
+      - 3000:3000
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
+    depends_on:
+      - mysql
+      - rabbitmq
+    volumes:
+      - .:/usr/src/nest-prisma-rabbitMQ
+      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - /usr/src/nest-prisma-rabbitmq/prisma
   mysql:
     image: mysql
     env_file:
       - .env
     ports:
       - '3306:3306'
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'

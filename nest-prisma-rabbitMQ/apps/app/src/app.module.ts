@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -10,8 +11,20 @@ import * as Joi from 'joi';
       validationSchema: Joi.object({
         PORT: Joi.number().required().port().default(3000),
       }),
-      envFilePath: ['./apps/server/.env'],
+      envFilePath: ['./apps/app/.env'],
     }),
+    ClientsModule.register([
+      {
+        name: 'MATH_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://rabbitmq:5672'],
+          queue: 'cats_queue',
+          persistent: true,
+          noAck: true,
+        },
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
