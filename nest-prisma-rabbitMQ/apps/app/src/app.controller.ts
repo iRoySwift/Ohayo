@@ -1,19 +1,21 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ClientProxy } from '@nestjs/microservices';
+import { AUTH_SERVICE } from './constants/services';
+import { JwtAuthGuard } from '@app/common';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    @Inject('MATH_SERVICE') private readonly client: ClientProxy,
+    @Inject(AUTH_SERVICE) private readonly client: ClientProxy,
   ) {}
 
   @Get()
-  getHello(): string {
+  @UseGuards(JwtAuthGuard)
+  getHello(@Req() req: any) {
     const record = 'hello';
     const result = this.client.send('test', record).subscribe();
-    console.log('result', result);
     return this.appService.getHello();
   }
 }

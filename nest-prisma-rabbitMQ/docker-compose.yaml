@@ -31,6 +31,9 @@ services:
       - .:/usr/src/nest-prisma-rabbitMQ
       - /usr/src/nest-prisma-rabbitMQ/node_modules
       - /usr/src/nest-prisma-rabbitmq/prisma
+    ports:
+      - 3001:3001
+
   mysql:
     image: mysql
     env_file:

@@ -3,28 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { AUTH_SERVICE } from './constants/services';
+import { AuthModule, RmqModule } from '@app/common';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       validationSchema: Joi.object({
         PORT: Joi.number().required().port().default(3000),
       }),
-      envFilePath: ['./apps/app/.env'],
+      envFilePath: ['./apps/app/.env', './.env'],
     }),
-    ClientsModule.register([
-      {
-        name: 'MATH_SERVICE',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://rabbitmq:5672'],
-          queue: 'cats_queue',
-          persistent: true,
-          noAck: true,
-        },
-      },
-    ]),
+    // RmqModule.register({ name: AUTH_SERVICE }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

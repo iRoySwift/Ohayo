@@ -36,4 +36,10 @@ export class AuthController {
   async test(@Payload() data: string) {
     console.log('🚀 ~ AuthController ~ test ~ data:', data);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @MessagePattern('validate_user')
+  async validateUser(@CurrentUser() user: User) {
+    return user;
+  }
 }
