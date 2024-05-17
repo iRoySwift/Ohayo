@@ -6,7 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { AUTH_SERVICE } from 'apps/app/src/constants/services';
+import { AUTH_SERVICE } from 'apps/gateway/src/constants/services';
 import { catchError, Observable, tap } from 'rxjs';
 
 @Injectable()

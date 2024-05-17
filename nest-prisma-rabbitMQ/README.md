@@ -75,7 +75,10 @@ $ docker-compose up --build -V
 ## Prisma
 
 ```bash
-$ pnpm prisma migrate dev --name init
+$ pnpm prisma generate
+$ pnpm prisma db pull
+$ pnpm prisma migrate dev --name init --skip-seed
+
 ```
 
 ## Support

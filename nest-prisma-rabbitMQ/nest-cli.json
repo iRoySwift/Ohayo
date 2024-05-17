@@ -1,22 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/app/src",
+  "sourceRoot": "apps/gateway/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/app/tsconfig.app.json"
+    "tsConfigPath": "apps/gateway/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/app",
+  "root": "apps/gateway",
   "projects": {
-    "app": {
+    "gateway": {
       "type": "application",
-      "root": "apps/app",
+      "root": "apps/gateway",
       "entryFile": "main",
-      "sourceRoot": "apps/app/src",
+      "sourceRoot": "apps/gateway/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/app/tsconfig.app.json"
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
     "log": {
@@ -44,15 +44,6 @@
       "sourceRoot": "apps/auth/src",
       "compilerOptions": {
         "tsConfigPath": "apps/auth/tsconfig.app.json"
-      }
-    },
-    "rmq": {
-      "type": "library",
-      "root": "libs/rmq",
-      "entryFile": "index",
-      "sourceRoot": "libs/rmq/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/rmq/tsconfig.lib.json"
       }
     },
     "common": {

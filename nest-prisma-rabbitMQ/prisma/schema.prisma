@@ -19,18 +19,20 @@ enum Status {
 }
 
 model log_login {
-  id Int @default(autoincrement()) @id
-  username String
-  ip String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      auth_users? @relation(fields: [userId], references: [id])
+  ip        String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model auth_users {
-  id Int @default(autoincrement()) @id
-  username String @unique
-  password String
-  status Status?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int         @id @default(autoincrement())
+  username  String      @unique
+  password  String
+  status    Status?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  log_login log_login[]
 }
