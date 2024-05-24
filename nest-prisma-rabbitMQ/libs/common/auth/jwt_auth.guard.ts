@@ -6,8 +6,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { AUTH_SERVICE } from 'apps/gateway/src/constants/services';
 import { catchError, Observable, tap } from 'rxjs';
+import { AUTH_SERVICE } from '@libs/constants';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -38,10 +38,6 @@ export class JwtAuthGuard implements CanActivate {
     } else if (context.getType() === 'http') {
       authentication = context.switchToHttp().getRequest()
         .cookies?.Authentication;
-      console.log(
-        '🚀 ~ JwtAuthGuard ~ getAuthentication ~ context.switchToHttp().getRequest():',
-        context.switchToHttp().getRequest().cookies,
-      );
     }
     if (!authentication) {
       throw new UnauthorizedException(

@@ -1,9 +1,10 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Global, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import { JwtAuthGuard } from './jwt_auth.guard';
 import { RmqModule } from '../rmq/rmq.module';
-import { AUTH_SERVICE } from 'apps/gateway/src/constants/services';
+import { AUTH_SERVICE } from '@libs/constants';
 
+@Global()
 @Module({
   imports: [RmqModule.register({ name: AUTH_SERVICE })],
   providers: [JwtAuthGuard],

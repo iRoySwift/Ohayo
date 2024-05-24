@@ -1,8 +1,8 @@
 import { Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
 import { JwtAuthGuard } from '@app/common';
-import { AUTH_SERVICE } from './constants/services';
 import { ClientProxy } from '@nestjs/microservices';
+import { AUTH_SERVICE } from '@libs/constants';
 
 @Controller()
 export class GatewayController {
@@ -16,6 +16,6 @@ export class GatewayController {
   getHello(@Req() req: any) {
     const record = 'hello';
     const result = this.client.send('test', record).subscribe();
-    return this.gatewayService.getHello();
+    return record;
   }
 }

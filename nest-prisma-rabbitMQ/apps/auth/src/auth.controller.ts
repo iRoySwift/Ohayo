@@ -6,14 +6,17 @@ import { CurrentUser } from './current-user.decorator';
 import { Response } from 'express';
 import { User } from './users/entities/user.entity';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { AUTH_LOGIN } from '@libs/constants';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
+  @MessagePattern(AUTH_LOGIN)
   @Post('login')
   async login(
+    @Payload() data: string,
     @CurrentUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ) {

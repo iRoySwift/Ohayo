@@ -1,12 +1,12 @@
 services:
-  app:
+  gateway:
     build:
       context: .
-      dockerfile: ./apps/app/Dockerfile
+      dockerfile: ./apps/gateway/Dockerfile
       target: development
-    command: npm run start:dev app
+    command: npm run start:dev gateway
     env_file:
-      - ./apps/app/.env
+      - ./apps/gateway/.env
     depends_on:
       - auth
     volumes:

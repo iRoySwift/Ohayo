@@ -3,8 +3,9 @@ import { GatewayController } from './gateway.controller';
 import { GatewayService } from './gateway.service';
 import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
-import { AUTH_SERVICE } from './constants/services';
-import { RmqModule } from '@app/common';
+import { RmqModule, AuthModule as AuthCommonModule } from '@app/common';
+import { AuthModule } from './auth/auth.module';
+import { AUTH_SERVICE } from '@libs/constants';
 
 @Module({
   imports: [
@@ -16,6 +17,8 @@ import { RmqModule } from '@app/common';
       envFilePath: ['./apps/gateway/.env', './.env'],
     }),
     RmqModule.register({ name: AUTH_SERVICE }),
+    AuthCommonModule,
+    AuthModule,
   ],
   controllers: [GatewayController],
   providers: [GatewayService],
