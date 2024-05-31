@@ -9,5 +9,9 @@ export class LogService {
 
   log(data: any): void {
     this.logger.log('log...', data);
+    this.logger.debug('log...', data);
+    this.logger.error('log...', data);
+    this.logger.verbose('log...', data);
+    this.logger.warn('log...', data);
   }
 }

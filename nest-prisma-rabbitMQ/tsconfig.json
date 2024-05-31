@@ -20,7 +20,8 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/common": ["libs/common"],
-      "@libs/*": ["libs/*"]
+      "@libs/*": ["libs/*"],
+      "@app/middleware": ["libs/middleware"]
     }
   }
 }

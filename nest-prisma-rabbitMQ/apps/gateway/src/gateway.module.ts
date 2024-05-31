@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RmqModule, AuthModule as AuthCommonModule } from '@app/common';
 import { AuthModule } from './auth/auth.module';
 import { AUTH_SERVICE } from '@libs/constants';
+import { LoggerModule } from '@app/middleware';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AUTH_SERVICE } from '@libs/constants';
     RmqModule.register({ name: AUTH_SERVICE }),
     AuthCommonModule,
     AuthModule,
+    LoggerModule,
   ],
   controllers: [GatewayController],
   providers: [GatewayService],

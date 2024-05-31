@@ -11,9 +11,14 @@ export class GatewayController {
     @Inject(AUTH_SERVICE) private readonly client: ClientProxy,
   ) {}
 
+  @Get()
+  getHello(@Req() req: any) {
+    return this.gatewayService.getHello(req);
+  }
+
   @Get('/hello')
   @UseGuards(JwtAuthGuard)
-  getHello(@Req() req: any) {
+  testHello(@Req() req: any) {
     const record = 'hello';
     const result = this.client.send('test', record).subscribe();
     return record;

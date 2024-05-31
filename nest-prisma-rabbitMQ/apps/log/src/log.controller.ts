@@ -9,4 +9,9 @@ export class LogController {
   getHello(): string {
     return this.logService.getHello();
   }
+
+  @Get('logs')
+  log() {
+    this.logService.log('test');
+  }
 }
