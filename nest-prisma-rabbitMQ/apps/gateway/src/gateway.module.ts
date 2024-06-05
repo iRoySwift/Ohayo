@@ -5,7 +5,7 @@ import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
 import { RmqModule, AuthModule as AuthCommonModule } from '@app/common';
 import { AuthModule } from './auth/auth.module';
-import { AUTH_SERVICE } from '@libs/constants';
+import { AUTH_SERVICE, LOG_SERVICE } from '@libs/constants';
 import { LoggerModule } from '@app/middleware';
 
 @Module({
@@ -17,9 +17,9 @@ import { LoggerModule } from '@app/middleware';
       }),
       envFilePath: ['./apps/gateway/.env', './.env'],
     }),
-    RmqModule.register({ name: AUTH_SERVICE }),
     AuthCommonModule,
     AuthModule,
+    RmqModule.register([{ name: AUTH_SERVICE }, { name: LOG_SERVICE }]),
     LoggerModule,
   ],
   controllers: [GatewayController],

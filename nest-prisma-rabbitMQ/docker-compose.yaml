@@ -4,11 +4,14 @@ services:
       context: .
       dockerfile: ./apps/gateway/Dockerfile
       target: development
-    command: npm run start:dev gateway
+    command: npm run start:dev
     env_file:
       - ./apps/gateway/.env
     depends_on:
+      - mysql
+      - rabbitmq
       - auth
+      - log
     volumes:
       - .:/usr/src/nest-prisma-rabbitMQ
       - /usr/src/nest-prisma-rabbitMQ/node_modules
@@ -33,6 +36,24 @@ services:
       - /usr/src/nest-prisma-rabbitmq/prisma
     ports:
       - 3001:3001
+
+  log:
+    build:
+      context: .
+      dockerfile: ./apps/log/Dockerfile
+      target: development
+    command: npm run start:dev log
+    env_file:
+      - ./apps/log/.env
+    depends_on:
+      - mysql
+      - rabbitmq
+    volumes:
+      - .:/usr/src/nest-prisma-rabbitMQ
+      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - /usr/src/nest-prisma-rabbitmq/prisma
+    ports:
+      - 3002:3002
 
   mysql:
     image: mysql

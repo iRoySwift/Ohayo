@@ -1,17 +1,19 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { iUser } from '@/typescript/user';
+import { DatabaseService } from '@app/common';
+import { Injectable } from '@nestjs/common';
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { LogLogin } from './dto/create-login-log';
 
 @Injectable()
 export class LogService {
-  private readonly logger: Logger = new Logger(LogService.name);
-  getHello(): string {
-    return 'Hello World!';
-  }
+  constructor(
+    @InjectPinoLogger(LogService.name) private logger: PinoLogger,
+    private readonly databaseService: DatabaseService,
+  ) {}
 
-  log(data: any): void {
-    this.logger.log('log...', data);
-    this.logger.debug('log...', data);
-    this.logger.error('log...', data);
-    this.logger.verbose('log...', data);
-    this.logger.warn('log...', data);
+  async createLoginLog(data: LogLogin) {
+    return await this.databaseService.log_login.create({
+      data,
+    });
   }
 }

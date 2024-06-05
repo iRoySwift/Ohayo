@@ -10,9 +10,13 @@ export class UsersService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findUserByUsername(username: string): Promise<User | undefined> {
-    return await this.databaseService.auth_users.findUnique({
-      where: { username },
-    });
+    try {
+      return await this.databaseService.auth_users?.findUnique({
+        where: { username },
+      });
+    } catch (error) {
+      return error;
+    }
   }
 
   async create(createUserDto: CreateUserDto) {
@@ -20,7 +24,7 @@ export class UsersService {
       createUserDto.username,
     );
     if (isUserNameExsit)
-      throw new UnprocessableEntityException('User already exists');
+      return new UnprocessableEntityException('User already exists');
     return await this.databaseService.auth_users.create({
       data: {
         ...createUserDto,

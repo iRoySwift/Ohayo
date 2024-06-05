@@ -18,7 +18,10 @@ export class AuthService {
     username: string,
     pass: string,
   ): Promise<Omit<User, 'password'> | null> {
-    const user = await this.userService.findUserByUsername(username);
+    const user = await this.userService?.findUserByUsername(username);
+    if (!user.password) {
+      return user;
+    }
     const passwordIsValid = await bcrypt.compare(pass, user.password);
     if (passwordIsValid) {
       const { password, ...result } = user;
@@ -28,6 +31,9 @@ export class AuthService {
   }
 
   async login(user: User, res: Response) {
+    if (!user.id) {
+      return user;
+    }
     const payload = { username: user.username, id: user.id };
     const expires = new Date();
     expires.setSeconds(

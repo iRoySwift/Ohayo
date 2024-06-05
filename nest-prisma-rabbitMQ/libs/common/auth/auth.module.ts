@@ -6,9 +6,9 @@ import { AUTH_SERVICE } from '@libs/constants';
 
 @Global()
 @Module({
-  imports: [RmqModule.register({ name: AUTH_SERVICE })],
+  imports: [RmqModule.register([{ name: AUTH_SERVICE }])],
   providers: [JwtAuthGuard],
-  exports: [JwtAuthGuard, RmqModule],
+  exports: [JwtAuthGuard],
 })
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

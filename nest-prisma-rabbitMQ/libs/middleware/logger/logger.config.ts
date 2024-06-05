@@ -51,32 +51,32 @@ export const loggerOptions: any = {
         responseTime: '响应时间(ms)',
       },
       level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
-      serializers: {
-        req(req: {
-          httpVersion: any;
-          raw: { httpVersion: any; params: any; query: any; body: any };
-          params: any;
-          query: any;
-          body: any;
-        }) {
-          req.httpVersion = req.raw.httpVersion;
-          req.params = req.raw.params;
-          req.query = req.raw.query;
-          req.body = req.raw.body;
-          return req;
-        },
-        err(err: {
-          params: any;
-          raw: { params: any; query: any; body: any };
-          query: any;
-          body: any;
-        }) {
-          err.params = err.raw.params;
-          err.query = err.raw.query;
-          err.body = err.raw.body;
-          return err;
-        },
-      },
+      // serializers: {
+      //   req(req: {
+      //     httpVersion: any;
+      //     raw: { httpVersion: any; params: any; query: any; body: any };
+      //     params: any;
+      //     query: any;
+      //     body: any;
+      //   }) {
+      //     req.httpVersion = req.raw.httpVersion;
+      //     req.params = req.raw.params;
+      //     req.query = req.raw.query;
+      //     req.body = req.raw.body;
+      //     return req;
+      //   },
+      //   err(err: {
+      //     params: any;
+      //     raw: { params: any; query: any; body: any };
+      //     query: any;
+      //     body: any;
+      //   }) {
+      //     err.params = err.raw.params;
+      //     err.query = err.raw.query;
+      //     err.body = err.raw.body;
+      //     return err;
+      //   },
+      // },
     },
     // multistream(
     //   [

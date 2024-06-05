@@ -1,3 +1,4 @@
 const AUTH_SERVICE = 'AUTH';
+const LOG_SERVICE = 'LOG';
 
-export { AUTH_SERVICE };
+export { AUTH_SERVICE, LOG_SERVICE };

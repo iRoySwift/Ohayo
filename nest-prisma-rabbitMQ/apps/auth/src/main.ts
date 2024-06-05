@@ -10,11 +10,11 @@ async function bootstrap() {
 
   const rmqService = app.get<RmqService>(RmqService);
   app.connectMicroservice<RmqOptions>(rmqService.getOptions('AUTH', true));
+  app.startAllMicroservices();
 
   app.useGlobalPipes(new ValidationPipe());
 
   const configService = app.get(ConfigService);
-  app.startAllMicroservices();
   await app.listen(configService.get('PORT'));
 }
 bootstrap();

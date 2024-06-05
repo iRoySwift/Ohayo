@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Res,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UpdateAuthDto } from './dto/update-auth.dto';
@@ -24,8 +25,8 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body() createAuthUserDto: CreateAuthUserDto) {
-    return this.authService.login(createAuthUserDto);
+  login(@Body() createAuthUserDto: CreateAuthUserDto, @Req() req) {
+    return this.authService.login(createAuthUserDto, req);
   }
 
   @Get()
