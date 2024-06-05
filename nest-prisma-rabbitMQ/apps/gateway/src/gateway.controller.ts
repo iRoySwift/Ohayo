@@ -2,7 +2,7 @@ import { Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
 import { JwtAuthGuard } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { AUTH_SERVICE } from '@libs/constants';
+import { AUTH_SERVICE } from '@/libs/constants';
 
 @Controller()
 export class GatewayController {

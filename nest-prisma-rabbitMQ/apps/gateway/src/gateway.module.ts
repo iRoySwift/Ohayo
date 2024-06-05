@@ -5,7 +5,7 @@ import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
 import { RmqModule, AuthModule as AuthCommonModule } from '@app/common';
 import { AuthModule } from './auth/auth.module';
-import { AUTH_SERVICE, LOG_SERVICE } from '@libs/constants';
+import { AUTH_SERVICE, LOG_SERVICE } from '@/libs/constants';
 import { LoggerModule } from '@app/middleware';
 
 @Module({

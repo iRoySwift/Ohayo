@@ -10,7 +10,7 @@ import {
   AUTH_LOGIN,
   LOG_LOGIN,
   LOG_SERVICE,
-} from '@libs/constants';
+} from '@/libs/constants';
 import { response, Request } from 'express';
 
 @Injectable()
