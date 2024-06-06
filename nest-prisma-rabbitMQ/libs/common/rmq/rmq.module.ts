@@ -6,7 +6,8 @@ import {
   ClientsProviderAsyncOptions,
   Transport,
 } from '@nestjs/microservices';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import * as Joi from 'joi';
 
 interface RmqModuleOptions {
   name: string;
@@ -14,6 +15,16 @@ interface RmqModuleOptions {
 
 @Global()
 @Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: false,
+      validationSchema: Joi.object({
+        RABBIT_MQ_URI: Joi.string().required(),
+        RABBIT_MQ_AUTH_QUEUE: Joi.string().required(),
+      }),
+      envFilePath: [`./.env.${process.env.NODE_ENV}`],
+    }),
+  ],
   providers: [RmqService],
   exports: [RmqService],
 })

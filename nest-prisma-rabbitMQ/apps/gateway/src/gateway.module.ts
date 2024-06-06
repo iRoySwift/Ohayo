@@ -15,7 +15,7 @@ import { LoggerModule } from '@app/middleware';
       validationSchema: Joi.object({
         PORT: Joi.number().required().port().default(3000),
       }),
-      envFilePath: ['./apps/gateway/.env', './.env'],
+      envFilePath: [`./apps/gateway/.env.${process.env.NODE_ENV}`],
     }),
     AuthCommonModule,
     AuthModule,
