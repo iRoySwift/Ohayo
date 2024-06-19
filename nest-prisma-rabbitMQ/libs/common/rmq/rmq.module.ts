@@ -16,14 +16,14 @@ interface RmqModuleOptions {
 @Global()
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: false,
-      validationSchema: Joi.object({
-        RABBIT_MQ_URI: Joi.string().required(),
-        RABBIT_MQ_AUTH_QUEUE: Joi.string().required(),
-      }),
-      envFilePath: [`./.env.${process.env.NODE_ENV}`],
-    }),
+    // ConfigModule.forRoot({
+    //   isGlobal: false,
+    //   validationSchema: Joi.object({
+    //     RABBIT_MQ_URI: Joi.string().required(),
+    //     RABBIT_MQ_AUTH_QUEUE: Joi.string().required(),
+    //   }),
+    //   envFilePath: [`./.env.${process.env.NODE_ENV}`],
+    // }),
   ],
   providers: [RmqService],
   exports: [RmqService],
@@ -36,8 +36,10 @@ export class RmqModule {
         return {
           transport: Transport.RMQ,
           options: {
-            urls: [configService.get<string>('RABBIT_MQ_URI')],
-            queue: configService.get<string>(`RABBIT_MQ_${item.name}_QUEUE`),
+            urls: [configService.get<string>('config.rabbit_mq_uri')],
+            queue: configService.get<string>(
+              `config.rabbit_mq_${item.name}_queue`,
+            ),
           },
         };
       },

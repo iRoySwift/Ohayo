@@ -4,15 +4,15 @@ import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class DatabaseService extends PrismaClient implements OnModuleInit {
-  // constructor(private readonly configService: ConfigService) {
-  //   super({
-  //     datasources: {
-  //       db: {
-  //         url: `${process.env.DATABASE_URL}`,
-  //       },
-  //     },
-  //   });
-  // }
+  constructor(private readonly configService: ConfigService) {
+    super({
+      datasources: {
+        db: {
+          url: `${configService.get('config.database_url')}`,
+        },
+      },
+    });
+  }
 
   async onModuleInit() {
     await this.$connect();

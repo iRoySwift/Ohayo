@@ -10,6 +10,6 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
-  await app.listen(configService.get('PORT'));
+  await app.listen(configService.get('apps.gateway.port'));
 }
 bootstrap();

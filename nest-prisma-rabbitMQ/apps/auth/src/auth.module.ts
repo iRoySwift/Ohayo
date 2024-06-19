@@ -8,23 +8,25 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { DatabaseModule, RmqModule } from '@app/common';
+import { GlobalModule } from '@/libs/common/global/global.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      validationSchema: Joi.object({
-        PORT: Joi.number().required().port().default(3001),
-        JWT_SECRET: Joi.string().required(),
-        JWT_EXPIRATION: Joi.number().required(),
-      }),
-      envFilePath: [`./apps/auth/.env.${process.env.NODE_ENV}`],
-    }),
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    //   validationSchema: Joi.object({
+    //     PORT: Joi.number().required().port().default(3001),
+    //     JWT_SECRET: Joi.string().required(),
+    //     JWT_EXPIRATION: Joi.number().required(),
+    //   }),
+    //   envFilePath: [`./apps/auth/.env.${process.env.NODE_ENV}`],
+    // }),
+    GlobalModule.forRoot(),
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
+        secret: configService.get<string>('apps.auth.jwt_secret'),
         signOptions: {
-          expiresIn: `${configService.get<number>('JWT_EXPIRATION')}s`,
+          expiresIn: `${configService.get<number>('apps.auth.jwt_expiration')}s`,
         },
       }),
       inject: [ConfigService],
