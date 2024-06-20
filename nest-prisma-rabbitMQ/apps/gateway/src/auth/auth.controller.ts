@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 // import { JwtAuthGuard } from '@app/common';
 import { CreateAuthUserDto } from './dto/create-auth-user.dto';
+import { JwtAuthGuard } from '@/libs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -29,9 +30,10 @@ export class AuthController {
     return this.authService.login(createAuthUserDto, req);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Get('users')
+  @UseGuards(JwtAuthGuard)
+  findAll(@Req() req) {
+    return this.authService.findAll(req);
   }
 
   @Get(':id')

@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { catchError, Observable, tap } from 'rxjs';
-import { AUTH_SERVICE } from '@/libs/constants';
+import { AUTH_SERVICE, AUTH_VALIDATE } from '@/libs/constants';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -16,10 +16,10 @@ export class JwtAuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const authentication = this.getAuthentication(context);
+    const authorization = this.getAuthentication(context);
     return this.authClient
-      .send('validate_user', {
-        Authentication: authentication,
+      .send(AUTH_VALIDATE, {
+        headers: { authorization },
       })
       .pipe(
         tap((res) => {
@@ -36,8 +36,9 @@ export class JwtAuthGuard implements CanActivate {
     if (context.getType() === 'rpc') {
       authentication = context.switchToRpc().getData().Authentication;
     } else if (context.getType() === 'http') {
-      authentication = context.switchToHttp().getRequest()
-        .cookies?.Authentication;
+      authentication =
+        // context.switchToHttp().getRequest().cookies?.Authentication ||
+        context.switchToHttp().getRequest().headers?.authorization;
     }
     if (!authentication) {
       throw new UnauthorizedException(

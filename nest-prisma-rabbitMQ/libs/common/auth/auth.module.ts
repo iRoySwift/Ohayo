@@ -6,7 +6,6 @@ import { AUTH_SERVICE } from '@/libs/constants';
 
 @Global()
 @Module({
-  imports: [RmqModule.register([{ name: AUTH_SERVICE }])],
   providers: [JwtAuthGuard],
   exports: [JwtAuthGuard],
 })

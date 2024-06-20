@@ -20,6 +20,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     password: string,
   ): Promise<Omit<User, 'password'> | any> {
     const user = await this.authService.validate(username, password);
+    console.log(
+      '🚀 ~ LocalStrategy ~ classLocalStrategyextendsPassportStrategy ~ user:',
+      user,
+    );
     if (!user) {
       return new UnauthorizedException();
     }

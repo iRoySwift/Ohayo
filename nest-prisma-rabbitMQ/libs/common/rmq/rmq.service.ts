@@ -12,7 +12,7 @@ export class RmqService {
       options: {
         urls: [this.configService.get<string>('config.rabbit_mq_uri')],
         queue: this.configService.get<string>(
-          `config.rabbit_mq_${queue}_queue`,
+          `config.rabbit_mq_${queue.toLowerCase()}_queue`,
         ),
         persistent: true,
         noAck,

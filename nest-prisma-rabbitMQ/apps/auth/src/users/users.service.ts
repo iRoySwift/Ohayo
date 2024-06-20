@@ -34,7 +34,12 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.databaseService.auth_users.findMany({});
+    try {
+      const users = await this.databaseService.auth_users.findMany({});
+      return users;
+    } catch (error) {
+      return error;
+    }
   }
 
   async findOne(id: number) {

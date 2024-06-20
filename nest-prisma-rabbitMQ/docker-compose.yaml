@@ -5,8 +5,8 @@ services:
       dockerfile: ./apps/gateway/Dockerfile
       target: development
     command: npm run start:dev
-    env_file:
-      - ./apps/gateway/.env
+    # env_file:
+    #   - ./apps/gateway/.env
     depends_on:
       - mysql
       - rabbitmq
@@ -25,8 +25,8 @@ services:
       dockerfile: ./apps/auth/Dockerfile
       target: development
     command: npm run start:dev auth
-    env_file:
-      - ./apps/auth/.env
+    # env_file:
+    #   - ./apps/auth/.env
     depends_on:
       - mysql
       - rabbitmq
@@ -43,8 +43,8 @@ services:
       dockerfile: ./apps/log/Dockerfile
       target: development
     command: npm run start:dev log
-    env_file:
-      - ./apps/log/.env
+    # env_file:
+    #   - ./apps/log/.env
     depends_on:
       - mysql
       - rabbitmq

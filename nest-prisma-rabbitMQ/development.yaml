@@ -3,14 +3,14 @@ apps:
     port: 3000
   auth:
     port: 3001
-    jwt_expiration: 3600
+    jwt_expiration: 36000
     jwt_secret: yJSDVpxKUQ1LSfrnrsLN6r6tmFd1i95I3zGXjpIryO8zoWg7fDmYEnyyCmtKFh2MFd4c7rFjN9wKsiwRXYKZ9BKJ5YHTByQi8Q4
   log:
     port: 3002
 config:
-  database_url: 'mysql://root:password@localhost:3306/nestjs_prisma'
-  mysql_database: nestjs_prisma
-  mysql_root_password: password
-  rabbit_mq_uri: amqp://localhost:5672
+  database_url: 'mysql://root:password@mysql:3306/nestjs_prisma'
+  # mysql_database: nestjs_prisma
+  # mysql_root_password: password
+  rabbit_mq_uri: amqp://rabbitmq:5672
   rabbit_mq_auth_queue: auth
   rabbit_mq_log_queue: log

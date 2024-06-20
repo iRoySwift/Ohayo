@@ -9,8 +9,6 @@ import { join } from 'path';
 @Module({})
 export class GlobalModule {
   static forRoot(options?: ConfigModuleOptions): DynamicModule {
-    console.log(__filename, __dirname, '--');
-
     const imports: DynamicModule['imports'] = [
       ConfigModule.forRoot({
         isGlobal: true,

@@ -38,8 +38,11 @@ export class RmqModule {
           options: {
             urls: [configService.get<string>('config.rabbit_mq_uri')],
             queue: configService.get<string>(
-              `config.rabbit_mq_${item.name}_queue`,
+              `config.rabbit_mq_${item.name.toLowerCase()}_queue`,
             ),
+            queueOptions: {
+              durable: true,
+            },
           },
         };
       },
@@ -56,8 +59,10 @@ export class RmqModule {
         //       return {
         //         transport: Transport.RMQ,
         //         options: {
-        //           urls: [configService.get<string>('RABBIT_MQ_URI')],
-        //           queue: configService.get<string>(`RABBIT_MQ_AUTH_QUEUE`),
+        //           urls: [configService.get<string>('config.rabbit_mq_uri')],
+        //           queue: configService.get<string>(
+        //             `config.rabbit_mq_auth_queue`,
+        //           ),
         //         },
         //       };
         //     },
@@ -69,8 +74,10 @@ export class RmqModule {
         //       return {
         //         transport: Transport.RMQ,
         //         options: {
-        //           urls: [configService.get<string>('RABBIT_MQ_URI')],
-        //           queue: configService.get<string>(`RABBIT_MQ_LOG_QUEUE`),
+        //           urls: [configService.get<string>('config.rabbit_mq_uri')],
+        //           queue: configService.get<string>(
+        //             `config.rabbit_mq_log_queue`,
+        //           ),
         //         },
         //       };
         //     },

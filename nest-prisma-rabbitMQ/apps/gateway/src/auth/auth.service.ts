@@ -10,6 +10,7 @@ import {
   AUTH_LOGIN,
   LOG_LOGIN,
   LOG_SERVICE,
+  AUTH_USER_FINDALL,
 } from '@/libs/constants';
 import { response, Request } from 'express';
 
@@ -39,8 +40,15 @@ export class AuthService {
     return loginInfo;
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async findAll(req: Request) {
+    const authorization = req.headers.authorization;
+    return await lastValueFrom(
+      this.authClient.send(AUTH_USER_FINDALL, {
+        headers: {
+          authorization,
+        },
+      }),
+    );
   }
 
   findOne(id: number) {

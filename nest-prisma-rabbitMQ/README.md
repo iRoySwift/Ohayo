@@ -69,7 +69,7 @@ $ pnpm run test:cov
 ## Docker
 
 ```bash
-$ docker-compose up --build -V
+$ docker-compose up --build -V -f development.yaml
 ```
 
 ## Prisma

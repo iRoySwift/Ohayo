@@ -6,12 +6,19 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { MessagePattern } from '@nestjs/microservices';
-import { AUTH_USERS_CREATE } from '@/libs/constants';
+import {
+  Ctx,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
+import { AUTH_USERS_CREATE, AUTH_USER_FINDALL } from '@/libs/constants';
+import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -23,8 +30,10 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @MessagePattern(AUTH_USER_FINDALL)
   @Get()
-  findAll() {
+  findAll(@Payload() data: any, @Ctx() context: RmqContext) {
     return this.usersService.findAll();
   }
 
