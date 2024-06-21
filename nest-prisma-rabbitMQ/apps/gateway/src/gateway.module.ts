@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { GatewayController } from './gateway.controller';
-import { GatewayService } from './gateway.service';
 import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
-import { RmqModule, AuthModule as AuthCommonModule } from '@app/common';
-import { AuthModule } from './auth/auth.module';
+import { RmqModule, AuthModule } from '@app/common';
 import { AUTH_SERVICE, LOG_SERVICE } from '@/libs/constants';
 import { LoggerModule } from '@app/middleware';
 import { GlobalModule } from '@/libs/common/global/global.module';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -19,12 +18,12 @@ import { GlobalModule } from '@/libs/common/global/global.module';
     //   envFilePath: [`./apps/gateway/.env.${process.env.NODE_ENV}`],
     // }),
     GlobalModule.forRoot(),
-    RmqModule.register([{ name: AUTH_SERVICE }, { name: LOG_SERVICE }]),
-    AuthCommonModule,
+    RmqModule.register(AUTH_SERVICE),
+    RmqModule.register(LOG_SERVICE),
     AuthModule,
     LoggerModule,
   ],
-  controllers: [GatewayController],
-  providers: [GatewayService],
+  controllers: [GatewayController, AuthController],
+  providers: [],
 })
 export class GatewayModule {}

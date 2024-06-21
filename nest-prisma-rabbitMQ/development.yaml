@@ -8,9 +8,9 @@ apps:
   log:
     port: 3002
 config:
-  database_url: 'mysql://root:password@mysql:3306/nestjs_prisma'
+  database_url: 'mysql://root:password@localhost:3306/nestjs_prisma'
   # mysql_database: nestjs_prisma
   # mysql_root_password: password
-  rabbit_mq_uri: amqp://rabbitmq:5672
+  rabbit_mq_uri: amqp://localhost:5672
   rabbit_mq_auth_queue: auth
   rabbit_mq_log_queue: log

@@ -14,6 +14,9 @@ export class RmqService {
         queue: this.configService.get<string>(
           `config.rabbit_mq_${queue.toLowerCase()}_queue`,
         ),
+        queueOptions: {
+          durable: true,
+        },
         persistent: true,
         noAck,
       },
