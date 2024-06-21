@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@app/common';
+import { AuthGuard } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AUTH_SERVICE } from '@/libs/constants';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
@@ -14,7 +14,7 @@ export class GatewayController {
   ) {}
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard)
   testHello(@Req() request: Request) {
     this.logger.trace({ foo: 'bar' }, 'baz %s', 'qux');
     this.logger.debug('foo %s %o', 'bar', { baz: 'qux' });

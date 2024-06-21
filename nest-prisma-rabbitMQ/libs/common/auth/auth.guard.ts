@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { catchError, Observable, tap } from 'rxjs';
-import { AUTH_SERVICE, AUTH_VALIDATE } from '@/libs/constants';
+import { AUTH_SERVICE, AUTH_VALIDATEJWT } from '@/libs/constants';
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(@Inject(AUTH_SERVICE) private authClient: ClientProxy) {}
 
   canActivate(
@@ -18,7 +18,7 @@ export class JwtAuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const authorization = this.getAuthentication(context);
     return this.authClient
-      .send(AUTH_VALIDATE, {
+      .send(AUTH_VALIDATEJWT, {
         headers: { authorization },
       })
       .pipe(

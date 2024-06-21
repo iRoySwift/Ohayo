@@ -31,7 +31,6 @@ export class AuthService {
   }
 
   async login(user: User, res: Response) {
-    console.log('🚀 ~ AuthService ~ login ~ user:', user);
     if (!user.id) {
       return user;
     }

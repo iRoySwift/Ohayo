@@ -17,7 +17,11 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
-import { AUTH_USERS_CREATE, AUTH_USER_FINDALL } from '@/libs/constants';
+import {
+  AUTH_USERS_CREATE,
+  AUTH_USER_FINDALL,
+  AUTH_USER_FINDONE,
+} from '@/libs/constants';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 
 @Controller('users')
@@ -36,10 +40,11 @@ export class UsersController {
   findAll(@Payload() data: any, @Ctx() context: RmqContext) {
     return this.usersService.findAll();
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  // @UseGuards(JwtAuthGuard)
+  // @Get(':id')
+  @MessagePattern(AUTH_USER_FINDONE)
+  findOne(@Param('id') id: string, @Payload() payload: { id: number }) {
+    return this.usersService.findOne(+payload.id);
   }
 
   @Patch(':id')

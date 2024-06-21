@@ -17,14 +17,15 @@ import {
   AUTH_SERVICE,
   AUTH_USERS_CREATE,
   AUTH_USER_FINDALL,
+  AUTH_USER_FINDONE,
   LOG_LOGIN,
   LOG_SERVICE,
 } from '@/libs/constants';
 import { ClientProxy } from '@nestjs/microservices';
-import { JwtAuthGuard } from '@/libs/common';
+import { AuthGuard } from '@/libs/common';
 import { UpdateUserDto } from '@/apps/auth/src/users/dto/update-user.dto';
 
-@Controller('/api/auth1')
+@Controller('/api/auth')
 export class AuthController {
   constructor(
     @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
@@ -53,7 +54,7 @@ export class AuthController {
   }
 
   @Get('getUsers')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard)
   async getUsers(@Req() req) {
     const authorization = req.headers.authorization;
     return await lastValueFrom(
@@ -65,9 +66,18 @@ export class AuthController {
     );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return `This action returns a #${id} auth`;
+  @UseGuards(AuthGuard)
+  @Get('/user/:id')
+  async getUser(@Param('id') id: string, @Req() req) {
+    const authorization = req.headers.authorization;
+    return await lastValueFrom(
+      this.authClient.send(AUTH_USER_FINDONE, {
+        // headers: {
+        //   authorization,
+        // },
+        id,
+      }),
+    );
   }
 
   @Patch(':id')

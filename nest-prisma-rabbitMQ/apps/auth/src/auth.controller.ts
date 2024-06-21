@@ -6,11 +6,17 @@ import { CurrentUser } from './current-user.decorator';
 import { Response } from 'express';
 import { User } from './users/entities/user.entity';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { AUTH_LOGIN, AUTH_VALIDATE } from '@/libs/constants';
+import { AUTH_LOGIN, AUTH_VALIDATEJWT } from '@/libs/constants';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @MessagePattern(AUTH_VALIDATEJWT)
+  async verifyJwt(@CurrentUser() user: User) {
+    return user;
+  }
 
   @UseGuards(LocalAuthGuard)
   @MessagePattern(AUTH_LOGIN)
@@ -27,17 +33,5 @@ export class AuthController {
   @Get('logout')
   async logout(@Res({ passthrough: true }) res: Response) {
     return this.authService.logout(res);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @MessagePattern(AUTH_VALIDATE)
-  async validateUser(@CurrentUser() user: User) {
-    return user;
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getUser(@CurrentUser() user: User): User {
-    return user;
   }
 }
