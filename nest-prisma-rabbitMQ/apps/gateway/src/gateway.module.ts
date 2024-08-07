@@ -7,6 +7,8 @@ import { AUTH_SERVICE, LOG_SERVICE } from '@/libs/constants';
 import { LoggerModule } from '@app/middleware';
 import { GlobalModule } from '@/libs/common/global/global.module';
 import { AuthController } from './auth.controller';
+import { FileModule } from './file/file.module';
+import { FileController } from './file/file.controller';
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { AuthController } from './auth.controller';
     RmqModule.register(LOG_SERVICE),
     AuthModule,
     LoggerModule,
+    FileModule,
   ],
   controllers: [GatewayController, AuthController],
   providers: [],
