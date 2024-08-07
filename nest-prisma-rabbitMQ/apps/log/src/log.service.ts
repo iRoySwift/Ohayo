@@ -12,6 +12,7 @@ export class LogService {
   ) {}
 
   async createLoginLog(data: LogLogin) {
+    console.log('🚀 ~ LogService ~ createLoginLog2 ~ data:', data);
     return await this.databaseService.log_login.create({
       data,
     });

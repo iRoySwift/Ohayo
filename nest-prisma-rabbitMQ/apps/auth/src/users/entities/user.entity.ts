@@ -1,5 +1,6 @@
 import {
   IsDate,
+  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -15,6 +16,9 @@ export class User {
 
   @IsString()
   password: string;
+
+  @IsEmail()
+  email: string;
 
   @IsString()
   status: string;

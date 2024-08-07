@@ -69,7 +69,7 @@ $ pnpm run test:cov
 ## Docker
 
 ```bash
-$ docker-compose up --build -V -f development.yaml
+$ docker-compose up --build
 ```
 
 ## Prisma
@@ -78,6 +78,7 @@ $ docker-compose up --build -V -f development.yaml
 $ pnpm prisma generate
 $ pnpm prisma db pull
 $ pnpm prisma migrate dev --name init --skip-seed
+$ pnpm prisma migrate dev --name add-email-column
 
 ```
 

@@ -15,17 +15,36 @@ export class UsersService {
         where: { username },
       });
     } catch (error) {
+      new UnprocessableEntityException(error);
+      return error;
+    }
+  }
+
+  async findUserByEmail(email: string): Promise<User | undefined> {
+    try {
+      return await this.databaseService.auth_users?.findUnique({
+        where: { email },
+      });
+    } catch (error) {
+      new UnprocessableEntityException(error);
       return error;
     }
   }
 
   async create(createUserDto: CreateUserDto) {
+    console.log('🚀 ~ UsersService ~ create ~ createUserDto:', createUserDto);
     const isUserNameExsit = await this.findUserByUsername(
       createUserDto.username,
     );
     if (isUserNameExsit)
       return new UnprocessableEntityException('User already exists');
-    return await this.databaseService.auth_users.create({
+
+    const isEmailExsit = await this.findUserByEmail(createUserDto.email);
+    console.log('🚀 ~ UsersService ~ create ~ isEmailExsit:', isEmailExsit);
+    if (isEmailExsit)
+      return new UnprocessableEntityException('email already exists');
+
+    return await this.databaseService.auth_users?.create({
       data: {
         ...createUserDto,
         password: await bcrypt.hash(createUserDto.password, 10),

@@ -10,6 +10,8 @@ export class LogController {
 
   @MessagePattern(LOG_LOGIN)
   async createLoginLog(@Payload() data: LogLogin) {
+    console.log('🚀 ~ LogController ~ createLoginLog ~ data:', data);
+
     return this.logService.createLoginLog(data);
   }
 }

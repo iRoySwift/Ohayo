@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,26 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Status {
-  ONLINE
-  OFFLINE
-}
-
 model log_login {
-  id        Int         @id @default(autoincrement())
-  userId    Int
-  user      auth_users? @relation(fields: [userId], references: [id])
+  id        Int        @id @default(autoincrement())
   ip        String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    Int
+  user      auth_users @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "log_login_userId_fkey")
 }
 
 model auth_users {
   id        Int         @id @default(autoincrement())
   username  String      @unique
   password  String
+  email     String      @unique
   status    Status?
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   log_login log_login[]
+}
+
+enum Status {
+  ONLINE
+  OFFLINE
 }

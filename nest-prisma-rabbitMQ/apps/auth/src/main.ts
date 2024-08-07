@@ -16,5 +16,8 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   await app.listen(configService.get('apps.auth.port'));
+  console.log(
+    `Auth Application is running on: ${await app.getUrl()} port: ${configService.get('apps.auth.port')}`,
+  );
 }
 bootstrap();

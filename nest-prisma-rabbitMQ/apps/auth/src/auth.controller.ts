@@ -34,4 +34,19 @@ export class AuthController {
   async logout(@Res({ passthrough: true }) res: Response) {
     return this.authService.logout(res);
   }
+
+  async vertical() {
+    // The api url
+    const urlToken = 'https://oauth-login.cloud.huawei.com/oauth2/v3/token';
+    // The value is fixed at authorization_code
+    const grant_type = 'authorization_code';
+    // Please replace with your client_id
+    const client_id = '1014*****';
+    // Please replace with your client_secret
+    const client_secret = '14275e4b570993*****';
+    // Please replace with your code
+    const code = 'xxx';
+    // JSONObject tokens = getTokenByCode(urlToken, code, client_secret, client_id, grant_type);
+    // Parse the data you want
+  }
 }

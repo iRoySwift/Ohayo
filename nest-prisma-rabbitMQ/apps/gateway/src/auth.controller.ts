@@ -40,16 +40,18 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() createUser: CreateUserDto, @Req() req) {
+  async login(@Body() createUser: UpdateUserDto, @Req() req) {
     const loginInfo = await lastValueFrom(
       this.authClient.send(AUTH_LOGIN, { body: createUser }),
     );
+    console.log('🚀 ~ AuthController1 ~ login ~ loginInfo:', loginInfo);
     await lastValueFrom(
       this.logClient.send(LOG_LOGIN, {
         userId: loginInfo.user.id,
         ip: req.ip,
       }),
     );
+    console.log('🚀 ~ AuthController2 ~ login ~ loginInfo:', loginInfo);
     return loginInfo;
   }
 
