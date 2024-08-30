@@ -19,9 +19,21 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["./*"],
-      "@app/common": ["libs/common"],
-      "@app/middleware": ["libs/middleware"]
+      "@/*": [
+        "./*"
+      ],
+      "@app/common": [
+        "libs/common"
+      ],
+      "@app/middleware": [
+        "libs/middleware"
+      ],
+      "@app/interceptor": [
+        "libs/interceptor/src"
+      ],
+      "@app/interceptor/*": [
+        "libs/interceptor/src/*"
+      ]
     }
   }
 }
