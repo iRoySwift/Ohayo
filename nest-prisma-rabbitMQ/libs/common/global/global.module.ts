@@ -15,10 +15,10 @@ export class GlobalModule {
         cache: true,
         load: [
           () => {
-            const ss = yaml.load(
+            const config = yaml.load(
               readFileSync(join(`${process.env.NODE_ENV}.yaml`), 'utf8'),
             ) as Record<string, any>;
-            return ss;
+            return config;
           },
         ],
       }),

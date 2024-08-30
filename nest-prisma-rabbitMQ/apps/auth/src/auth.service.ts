@@ -18,8 +18,8 @@ export class AuthService {
     username: string,
     pass: string,
   ): Promise<Omit<User, 'password'> | null> {
-    const user = await this.userService?.findUserByUsername(username);
-    if (!user.password) {
+    const user = (await this.userService?.findUserByUsername(username)) as User;
+    if (!user?.password) {
       return user;
     }
     const passwordIsValid = await bcrypt.compare(pass, user.password);
@@ -40,8 +40,6 @@ export class AuthService {
       expires.getSeconds() + this.configService.get('apps.auth.jwt_expiration'),
     );
     const token = this.jwtService.sign(payload);
-
-    console.log('🚀 ~ AuthService ~ login ~ user, token:', user, token);
 
     res?.cookie('Authentication', token, {
       httpOnly: true,

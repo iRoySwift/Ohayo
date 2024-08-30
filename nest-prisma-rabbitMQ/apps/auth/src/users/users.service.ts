@@ -9,25 +9,27 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async findUserByUsername(username: string): Promise<User | undefined> {
+  async findUserByUsername(
+    username: string,
+  ): Promise<User | UnprocessableEntityException> {
     try {
       return await this.databaseService.auth_users?.findUnique({
         where: { username },
       });
     } catch (error) {
-      new UnprocessableEntityException(error);
-      return error;
+      return new UnprocessableEntityException(error);
     }
   }
 
-  async findUserByEmail(email: string): Promise<User | undefined> {
+  async findUserByEmail(
+    email: string,
+  ): Promise<User | undefined | UnprocessableEntityException> {
     try {
       return await this.databaseService.auth_users?.findUnique({
         where: { email },
       });
     } catch (error) {
-      new UnprocessableEntityException(error);
-      return error;
+      return new UnprocessableEntityException(error);
     }
   }
 

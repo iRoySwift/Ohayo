@@ -9,6 +9,7 @@ import { GlobalModule } from '@/libs/common/global/global.module';
 import { AuthController } from './auth.controller';
 import { FileModule } from './file/file.module';
 import { FileController } from './file/file.controller';
+import { HttpExceptionModule, HttpSuccessModule } from '@/libs/interceptor';
 
 @Module({
   imports: [
@@ -25,6 +26,8 @@ import { FileController } from './file/file.controller';
     AuthModule,
     LoggerModule,
     FileModule,
+    HttpSuccessModule,
+    HttpExceptionModule,
   ],
   controllers: [GatewayController, AuthController],
   providers: [],

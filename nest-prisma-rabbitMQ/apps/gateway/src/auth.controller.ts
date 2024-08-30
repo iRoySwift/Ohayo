@@ -44,14 +44,14 @@ export class AuthController {
     const loginInfo = await lastValueFrom(
       this.authClient.send(AUTH_LOGIN, { body: createUser }),
     );
-    console.log('🚀 ~ AuthController1 ~ login ~ loginInfo:', loginInfo);
-    await lastValueFrom(
-      this.logClient.send(LOG_LOGIN, {
-        userId: loginInfo.user.id,
-        ip: req.ip,
-      }),
-    );
-    console.log('🚀 ~ AuthController2 ~ login ~ loginInfo:', loginInfo);
+    if (loginInfo?.user?.id) {
+      await lastValueFrom(
+        this.logClient.send(LOG_LOGIN, {
+          userId: loginInfo.user.id,
+          ip: req.ip,
+        }),
+      );
+    }
     return loginInfo;
   }
 
@@ -74,9 +74,9 @@ export class AuthController {
     const authorization = req.headers.authorization;
     return await lastValueFrom(
       this.authClient.send(AUTH_USER_FINDONE, {
-        // headers: {
-        //   authorization,
-        // },
+        headers: {
+          authorization,
+        },
         id,
       }),
     );

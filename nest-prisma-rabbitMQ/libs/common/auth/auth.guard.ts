@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
           this.addUser(res, context);
         }),
         catchError(() => {
-          throw new UnauthorizedException();
+          throw new UnauthorizedException('请登录！');
         }),
       );
   }

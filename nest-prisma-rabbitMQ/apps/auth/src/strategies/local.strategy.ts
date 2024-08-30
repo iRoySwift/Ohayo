@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { AuthService } from '../auth.service';
@@ -20,12 +20,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     password: string,
   ): Promise<Omit<User, 'password'> | any> {
     const user = await this.authService.validate(username, password);
-    console.log(
-      '🚀 ~ LocalStrategy ~ classLocalStrategyextendsPassportStrategy ~ user:',
-      user,
-    );
+
     if (!user) {
-      return new UnauthorizedException();
+      return new NotFoundException('用户不存在').getResponse();
     }
     return user;
   }
