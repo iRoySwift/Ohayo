@@ -14,6 +14,8 @@ import {
   HttpStatus,
   Next,
   Query,
+  ParseFilePipe,
+  MaxFileSizeValidator,
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { CreateFileDto } from './dto/create-file.dto';
@@ -34,7 +36,12 @@ export class FileController {
   // @ApiConsumes('multipart/form-data')
   uploadFile(
     @Body() body: CreateFileDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new MaxFileSizeValidator({ maxSize: 1000 })],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     return {
       file,

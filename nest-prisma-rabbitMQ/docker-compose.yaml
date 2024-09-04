@@ -13,8 +13,8 @@ services:
       - auth
       - log
     volumes:
-      - .:/usr/src/nest-prisma-rabbitMQ
-      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - .:/usr/src/nest-prisma-rabbitmq
+      - /usr/src/nest-prisma-rabbitmq/node_modules
       - /usr/src/nest-prisma-rabbitmq/prisma
     ports:
       - 3000:3000
@@ -31,8 +31,8 @@ services:
       - mysql
       - rabbitmq
     volumes:
-      - .:/usr/src/nest-prisma-rabbitMQ
-      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - .:/usr/src/nest-prisma-rabbitmq
+      - /usr/src/nest-prisma-rabbitmq/node_modules
       - /usr/src/nest-prisma-rabbitmq/prisma
     ports:
       - 3001:3001
@@ -49,8 +49,8 @@ services:
       - mysql
       - rabbitmq
     volumes:
-      - .:/usr/src/nest-prisma-rabbitMQ
-      - /usr/src/nest-prisma-rabbitMQ/node_modules
+      - .:/usr/src/nest-prisma-rabbitmq
+      - /usr/src/nest-prisma-rabbitmq/node_modules
       - /usr/src/nest-prisma-rabbitmq/prisma
     ports:
       - 3002:3002
