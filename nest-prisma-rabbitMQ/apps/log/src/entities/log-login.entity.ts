@@ -1,22 +1,22 @@
-import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { iUser } from 'typescript/user';
+import { IsDate, IsNumber, IsString, ValidateNested } from "class-validator";
+import { iUser } from "typescript/user";
 
 export class LogLogin {
-  @IsNumber()
-  id: number;
+    @IsNumber()
+    id: number;
 
-  @IsNumber()
-  userId: number;
+    @IsNumber()
+    userId: number;
 
-  @ValidateNested()
-  user: iUser;
+    @ValidateNested()
+    user: iUser;
 
-  @IsString()
-  ip: string;
+    @IsString()
+    ip: string;
 
-  @IsDate()
-  createdAt: Date;
+    @IsDate()
+    createdAt: Date;
 
-  @IsDate()
-  updatedAt: Date;
+    @IsDate()
+    updatedAt: Date;
 }

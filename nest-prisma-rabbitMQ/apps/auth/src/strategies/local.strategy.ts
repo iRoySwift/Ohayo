@@ -1,29 +1,29 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-local';
-import { AuthService } from '../auth.service';
-import { User } from '../users/entities/user.entity';
-import { ExtractJwt } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { Strategy } from "passport-local";
+import { AuthService } from "../auth.service";
+import { User } from "../users/entities/user.entity";
+import { ExtractJwt } from "passport-jwt";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private authService: AuthService,
-    private readonly configService: ConfigService,
-  ) {
-    super();
-  }
-
-  async validate(
-    username: string,
-    password: string,
-  ): Promise<Omit<User, 'password'> | any> {
-    const user = await this.authService.validate(username, password);
-
-    if (!user) {
-      return new NotFoundException('用户不存在').getResponse();
+    constructor(
+        private authService: AuthService,
+        private readonly configService: ConfigService
+    ) {
+        super();
     }
-    return user;
-  }
+
+    async validate(
+        username: string,
+        password: string
+    ): Promise<Omit<User, "password"> | any> {
+        const user = await this.authService.validate(username, password);
+
+        if (!user) {
+            return new NotFoundException("用户不存在").getResponse();
+        }
+        return user;
+    }
 }

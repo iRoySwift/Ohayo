@@ -1,3 +1,3 @@
 export class CreateFileDto {
-  name: string;
+    name: string;
 }
