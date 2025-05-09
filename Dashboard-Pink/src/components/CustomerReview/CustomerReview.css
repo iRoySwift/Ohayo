@@ -1,0 +1,14 @@
+@media screen and (max-width: 768px) {
+  .CustomerReview {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+
+  .MuiPaper-root>table {
+    min-width: unset
+  }
+
+}
